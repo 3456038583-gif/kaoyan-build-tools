@@ -1,0 +1,9 @@
+.DS_Store
+node_modules/
+__pycache__/
+
+# 本机缓存：政治 OCR 结果、一页纸中间文件；删掉重跑会重新识别
+.cache/
+
+# 每次运行都会重写的报告
+build-report.txt

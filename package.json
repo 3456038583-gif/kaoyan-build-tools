@@ -1,0 +1,14 @@
+{
+  "name": "build-tools",
+  "private": true,
+  "type": "module",
+  "description": "把 Lazy-Kaoyan-Library Obsidian 仓库构建成 kaoyan.feikntn111.us.ci 的静态知识库",
+  "scripts": {
+    "build": "node build-library.mjs"
+  },
+  "dependencies": {
+    "js-yaml": "^4.1.0",
+    "katex": "^0.16.11",
+    "marked": "^12.0.2"
+  }
+}
