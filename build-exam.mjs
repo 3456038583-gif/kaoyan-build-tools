@@ -88,6 +88,7 @@ const HEAD = `<!doctype html>
 <link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Mono:wght@500;600&family=Noto+Sans+SC:wght@400;500;700&family=Noto+Serif+SC:wght@600;700&display=swap" rel="stylesheet" media="print" onload="this.media='all'">
 <link rel="stylesheet" href="/site.css">
 <link rel="stylesheet" href="/exam/exam.css">
+<script src="/countdown.js" defer></script>
 </head>
 <body>`;
 

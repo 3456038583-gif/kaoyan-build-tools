@@ -719,6 +719,7 @@ PAGE_HEAD = '''<!doctype html>
 <link rel="stylesheet" href="/site.css">
 <link rel="stylesheet" href="/library/note.css">
 <link rel="stylesheet" href="/library/政治/onepage.css">
+<script src="/countdown.js" defer></script>
 </head>
 <body class="note-page op-page">
 

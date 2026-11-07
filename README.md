@@ -126,6 +126,24 @@ node build-exam.mjs
 
 英语一/英语二两套年份直接并列，点年份即进整套试卷，没有二级标签页。
 
+## 英语作文配图
+
+```bash
+CLEAN_PDF_DIR="$HOME/Desktop/考研英语资料/考研真题（无水印）" \
+  python3 build-writing-figs.py                  # 只打印每张图的裁切框与大小，不落盘
+CLEAN_PDF_DIR=… python3 build-writing-figs.py --apply              # 全部重切
+CLEAN_PDF_DIR=… python3 build-writing-figs.py --apply 2021-y1 2024-y1   # 只重切指定卷
+```
+
+- 输出：`kaoyan-hub/exam/figs/writing/<年份>-<y1|y2>.png`，200dpi
+- 做法：整页灰度 → 按「整行空白」切横条（`gap=30`）→ 剔掉页眉（顶部 10—18%）与页脚（>86%）
+  → 取正文最后一个大块（配图总在正文末尾、页脚之上）→ 块内再按 `gap=14` 切一次、
+  取最高子块（甩掉混进来的「Write your answer…」提示语）→ `ink_box()` 按墨迹收紧 → 加边距
+- 版式特殊、自动切不准的卷种写死在 `OVERRIDE` 里（`{'2021-y1': (页码, (x0,y0,x1,y1))}`，
+  坐标是 100dpi 页面像素）。目前 8 卷走覆盖框：2012-y2 / 2021-y1 / 2021-y2 / 2022-y1 /
+  2023-y2 / 2024-y1 / 2025-y1 / 2026-y2
+- 换新一年的原卷后先跑一遍不带 `--apply` 的预览，确认 `cands` 取到的是图不是正文，再落盘
+
 ## 重建顺序
 
 `build-library.mjs` 会整目录重建 `library/`，但它会先把 `library/政治/` 备份再还原，

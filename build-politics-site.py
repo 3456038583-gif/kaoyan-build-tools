@@ -41,6 +41,7 @@ HEAD = """<!doctype html>
 <link rel="stylesheet" href="/site.css">
 <link rel="stylesheet" href="/exam/exam.css">
 <link rel="stylesheet" href="/politics/politics.css">
+<script src="/countdown.js" defer></script>
 </head>
 <body>"""
 

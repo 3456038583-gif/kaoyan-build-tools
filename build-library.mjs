@@ -664,6 +664,7 @@ function renderNotePage(n) {
 <link rel="stylesheet" href="/vendor/katex/katex.min.css">
 <link rel="stylesheet" href="/site.css">
 <link rel="stylesheet" href="/library/note.css">
+<script src="/countdown.js" defer></script>
 </head>
 <body class="note-page">
 ${SITE_NAV('library')}
@@ -783,6 +784,7 @@ let libraryIndex = `<!doctype html>
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <link rel="stylesheet" href="/site.css">
 <link rel="stylesheet" href="/library/note.css">
+<script src="/countdown.js" defer></script>
 </head>
 <body class="lib-index">
 ${SITE_NAV('library')}

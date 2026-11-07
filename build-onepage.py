@@ -150,6 +150,7 @@ def build():
 <link rel="stylesheet" href="/site.css">
 <link rel="stylesheet" href="/library/note.css">
 <link rel="stylesheet" href="/library/政治/onepage.css">
+<script src="/countdown.js" defer></script>
 </head>
 <body class="note-page op-page">
 
@@ -321,6 +322,7 @@ INDEX_HTML = """<!doctype html>
 <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+SC:wght@400;500;700&family=Noto+Serif+SC:wght@600;700&family=IBM+Plex+Mono:wght@500&display=swap" rel="stylesheet" media="print" onload="this.media='all'">
 <link rel="stylesheet" href="/site.css">
 <link rel="stylesheet" href="/library/note.css">
+<script src="/countdown.js" defer></script>
 </head>
 <body class="lib-index">
 
