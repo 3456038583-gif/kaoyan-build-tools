@@ -729,7 +729,6 @@ PAGE_HEAD = '''<!doctype html>
     <a href="/math/">数学真题</a>
     <a href="/exam/">英语真题</a>
     <a href="/politics/">政治真题</a>
-    <a href="/english/">英语速查</a>
     <a href="/library/" class="on">知识库</a>
   </div>
 </nav>

@@ -631,7 +631,8 @@ const SITE_NAV = (active) => `
     <a href="/math/"${active === 'math' ? ' class="on"' : ''}>数学真题</a>
     <a href="/exam/"${active === 'exam' ? ' class="on"' : ''}>英语真题</a>
     <a href="/politics/"${active === 'politics' ? ' class="on"' : ''}>政治真题</a>
-    <a href="/english/"${active === 'english' ? ' class="on"' : ''}>英语速查</a>
+    <a href="/vocab/"${active === 'vocab' ? ' class="on"' : ''}>英语词汇</a>
+    <a href="/mac/"${active === 'mac' ? ' class="on"' : ''}>macOS 版</a>
     <a href="/library/"${active === 'library' ? ' class="on"' : ''}>知识库</a>
   </div>
 </nav>`;

@@ -16,6 +16,7 @@ bp = SourceFileLoader('bp', str(Path(__file__).parent / 'build-politics.py')).lo
 mt = SourceFileLoader('mt', str(Path(__file__).parent / 'politics-material.py')).load_module()
 
 SITE = bp.SITE
+VER = '20261126a'
 
 NAV = """<nav class="sitebar" aria-label="站点导航">
   <a class="sb-brand" href="/">考研资料总库</a>
@@ -23,13 +24,14 @@ NAV = """<nav class="sitebar" aria-label="站点导航">
     <a href="/math/">数学真题</a>
     <a href="/exam/">英语真题</a>
     <a href="/politics/" class="on">政治真题</a>
-    <a href="/english/">英语速查</a>
+    <a href="/vocab/">英语词汇</a>
+    <a href="/mac/">macOS 版</a>
     <a href="/library/">知识库</a>
   </div>
 </nav>"""
 
 HEAD = """<!doctype html>
-<html lang="zh-CN">
+<html lang="zh-CN" data-view="pol">
 <head>
 <meta charset="utf-8">
 <title>{title}</title>
@@ -39,8 +41,9 @@ HEAD = """<!doctype html>
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Mono:wght@500;600&family=Noto+Sans+SC:wght@400;500;700&family=Noto+Serif+SC:wght@600;700&display=swap" rel="stylesheet" media="print" onload="this.media='all'">
 <link rel="stylesheet" href="/site.css">
-<link rel="stylesheet" href="/exam/exam.css">
-<link rel="stylesheet" href="/politics/politics.css">
+<link rel="stylesheet" href="/exam/exam.css?v={ver}">
+<link rel="stylesheet" href="/exam/shell.css?v={ver}">
+<link rel="stylesheet" href="/politics/politics.css?v={ver}">
 <script src="/countdown.js" defer></script>
 </head>
 <body>"""
@@ -172,28 +175,47 @@ def to_paper(sections, year=None):
 
 
 def ex_bar(year, self_href=None):
-    """顶部条：年份 + 练习记录 / 一页纸（和数学真题一致，进来就是试卷）"""
+    """顶部条：板块在年份之上（和数学真题一致）
+    第一行：政治真题 ｜ 成绩台账 / 肖八模拟 / 练习记录 / 政治一页纸
+    第二行：年份（下方带题量）
+    """
     chips = []
     for y in sorted(bp.PAPERS, reverse=True):
         cur = y == year
         href = self_href if (cur and self_href) else f'/politics/{y}'
         cls = ' on' if cur else ''
         aria = ' aria-current="page"' if cur else ''
-        chips.append(f'<a class="eb-yr{cls}" href="{href}"{aria} data-id="{y}" title="{y} 年考研政治真题">{y}</a>')
-    return ('<div class="ex-bar"><div class="ex-bar-in">'
-            f'<div class="eb-years" aria-label="年份">{"".join(chips)}</div>'
-            '<div class="eb-side"><a class="eb-link" href="/politics/records.html">练习记录</a>'
-            '<a class="eb-link" href="/library/政治/">政治一页纸</a></div>'
+        chips.append(f'<a class="pyear{cls}" href="{href}"{aria} data-id="{y}" data-n="38" '
+                     f'title="{y} 年考研政治真题">{y}<span class="y-st">38 题</span></a>')
+    return ('<div class="pbar"><div class="pbar-in">'
+            '<div class="pmods" aria-label="板块">'
+            '<div class="pmodgroup">'
+            '<a class="pmod on" href="/politics/" aria-current="page">政治真题'
+            f'<span class="cnt">{len(bp.PAPERS)} 套</span></a>'
+            '</div>'
+            '<div class="pmodgroup pmodgroup--tools">'
+            '<a class="pmod pmod--tool" href="/politics/scores">成绩台账</a>'
+            '<a class="pmod pmod--tool" href="/politics/xiao8-1">肖八模拟</a>'
+            '<a class="pmod pmod--tool" href="/politics/records.html">练习记录</a>'
+            '<a class="pmod pmod--tool" href="/library/政治/">政治一页纸</a>'
+            '</div>'
+            '</div>'
+            f'<div class="pbar-years"><div class="pyears" aria-label="年份">{"".join(chips)}</div></div>'
             '</div></div>')
 
 
 MARKS_JS = """<script>
 (function () {
-  [].forEach.call(document.querySelectorAll('.eb-yr[data-id]'), function (a) {
+  [].forEach.call(document.querySelectorAll('.pyear[data-id]'), function (a) {
     try {
       var s = JSON.parse(localStorage.getItem('kaoyan-politics:' + a.dataset.id) || '{}');
       var n = Object.keys(s.picks || {}).length;
-      if (n) { a.classList.add('has'); a.title = a.title + ' · 已答 ' + n + ' 题'; }
+      var st = a.querySelector('.y-st');
+      if (n) {
+        a.classList.add('has');
+        a.title = a.title + ' · 已答 ' + n + ' 题';
+        if (st) st.textContent = '答 ' + n;
+      }
     } catch (e) {}
   });
 })();
@@ -243,7 +265,8 @@ def emit(year, sections, out_name=None):
 
     papers_js = json.dumps([{'id': y, 'y': y} for y in sorted(bp.PAPERS)], ensure_ascii=False)
     html = HEAD.format(title=f'{year} 年考研政治真题 · 考研资料总库',
-                       desc=f'{year} 年考研政治真题逐题还原：单选、多选、材料分析题，可在线作答并自动算分。')
+                       desc=f'{year} 年考研政治真题逐题还原：单选、多选、材料分析题，可在线作答并自动算分。',
+                       ver=VER)
     if out_name == 'index.html':
         html = html.replace('</head>', POS_JS % year + '\n</head>')
     html += '\n' + NAV + '\n'
@@ -251,8 +274,10 @@ def emit(year, sections, out_name=None):
     html += '<div id="paper"></div>\n'
     html += MARKS_JS + '\n'
     html += f'<script>window.__PAPERS__ = {papers_js};</script>\n'
+    html += f'<script src="/exam/pdfview.js?v={VER}" defer></script>\n'
     html += f'<script src="/politics/data/{year}.js"></script>\n'
-    html += '<script src="/politics/politics.js"></script>\n'
+    html += f'<script src="/politics/data/ana-{year}.js?v={VER}"></script>\n'
+    html += f'<script src="/politics/politics.js?v={VER}"></script>\n'
     html += TAIL
     (SITE / 'politics' / (out_name or f'{year}.html')).write_text(html, encoding='utf-8')
     return total, mc, missing
@@ -283,7 +308,8 @@ RECORDS_BODY = """
 
 def emit_records():
     html = HEAD.format(title='我的练习记录 · 考研政治真题',
-                       desc='考研政治真题作答记录：各卷客观题得分、正确率与作答进度，保存在本机浏览器。')
+                       desc='考研政治真题作答记录：各卷客观题得分、正确率与作答进度，保存在本机浏览器。',
+                       ver=VER)
     html += '\n' + NAV + '\n' + ex_bar(None, None) + RECORDS_BODY + TAIL
     (SITE / 'politics/records.html').write_text(html, encoding='utf-8')
 
