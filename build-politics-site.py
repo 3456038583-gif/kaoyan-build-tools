@@ -25,7 +25,7 @@ NAV = """<nav class="sitebar" aria-label="站点导航">
     <a href="/exam/">英语真题</a>
     <a href="/politics/" class="on">政治真题</a>
     <a href="/vocab/">英语词汇</a>
-    <a href="/mac/">macOS 版</a>
+    <a href="/export/">备份 · 桌面版</a>
     <a href="/library/">知识库</a>
   </div>
 </nav>"""

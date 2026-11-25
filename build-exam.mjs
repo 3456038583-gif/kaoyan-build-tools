@@ -77,7 +77,7 @@ const NAV = `<nav class="sitebar" aria-label="站点导航">
     <a href="/exam/" class="on">英语真题</a>
     <a href="/politics/">政治真题</a>
     <a href="/vocab/">英语词汇</a>
-    <a href="/mac/">macOS 版</a>
+    <a href="/export/">备份 · 桌面版</a>
     <a href="/library/">知识库</a>
   </div>
 </nav>`;
@@ -108,7 +108,7 @@ const HEAD = `<!doctype html>
  * @param {object} p 当前试卷
  * @param {string} [selfHref] 当前年 chip 的地址（首页为 /exam/）
  */
-function barHtml(p, selfHref) {
+function barHtml(p, selfHref, activeTool) {
   const sets = ['y1', 'y2'].filter(len);
   const tabs = sets
     .map((s) => {
@@ -141,7 +141,7 @@ function barHtml(p, selfHref) {
     <div class="pmods" aria-label="板块">
       <div class="pmodgroup">${tabs}</div>
       <div class="pmodgroup pmodgroup--modes"><a class="pmod" href="/english/?set=r1">一刷速查</a><a class="pmod" href="/english/?set=r2">二刷速查</a></div>
-      <div class="pmodgroup pmodgroup--tools"><a class="pmod pmod--tool" href="/exam/records.html">练习记录</a></div>
+      <div class="pmodgroup pmodgroup--tools"><a class="pmod pmod--tool${activeTool === 'records' ? ' is-active' : ''}" href="/exam/records.html">练习记录</a></div>
     </div>
     <div class="pbar-years"><div class="pyears" aria-label="年份">${chips.join('')}</div></div>
   </div>
@@ -222,7 +222,7 @@ fs.writeFileSync(
   path.join(SITE, 'exam/records.html'),
   `${recHead}
 ${NAV}
-${barHtml(first, '/exam/')}
+${barHtml(first, '/exam/', 'records')}
 
 <div class="ex-wrap">
   <header class="ex-mast">

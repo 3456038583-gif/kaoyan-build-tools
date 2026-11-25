@@ -632,7 +632,7 @@ const SITE_NAV = (active) => `
     <a href="/exam/"${active === 'exam' ? ' class="on"' : ''}>英语真题</a>
     <a href="/politics/"${active === 'politics' ? ' class="on"' : ''}>政治真题</a>
     <a href="/vocab/"${active === 'vocab' ? ' class="on"' : ''}>英语词汇</a>
-    <a href="/mac/"${active === 'mac' ? ' class="on"' : ''}>macOS 版</a>
+    <a href="/export/"${active === 'export' ? ' class="on"' : ''}>备份 · 桌面版</a>
     <a href="/library/"${active === 'library' ? ' class="on"' : ''}>知识库</a>
   </div>
 </nav>`;
