@@ -34,6 +34,9 @@ HEAD = """<!doctype html>
 <html lang="zh-CN" data-view="pol">
 <head>
 <meta charset="utf-8">
+<link rel="icon" type="image/png" sizes="32x32" href="/img/icons/f/politics-32.png">
+<link rel="icon" type="image/png" sizes="16x16" href="/img/icons/f/politics-16.png">
+<link rel="apple-touch-icon" href="/img/icons/apple-touch-icon.png">
 <title>{title}</title>
 <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
 <meta name="description" content="{desc}">

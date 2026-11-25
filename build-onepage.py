@@ -142,6 +142,9 @@ def build():
 <html lang="zh-CN">
 <head>
 <meta charset="utf-8">
+<link rel="icon" type="image/png" sizes="32x32" href="/img/icons/f/search-32.png">
+<link rel="icon" type="image/png" sizes="16x16" href="/img/icons/f/search-16.png">
+<link rel="apple-touch-icon" href="/img/icons/apple-touch-icon.png">
 <title>27 考研政治一页纸 · 知识点手册 · 知识库</title>
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <link rel="preconnect" href="https://fonts.googleapis.com">
@@ -314,6 +317,9 @@ INDEX_HTML = """<!doctype html>
 <html lang="zh-CN">
 <head>
 <meta charset="utf-8">
+<link rel="icon" type="image/png" sizes="32x32" href="/img/icons/f/search-32.png">
+<link rel="icon" type="image/png" sizes="16x16" href="/img/icons/f/search-16.png">
+<link rel="apple-touch-icon" href="/img/icons/apple-touch-icon.png">
 <title>政治 · 知识库</title>
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <link rel="preconnect" href="https://fonts.googleapis.com">

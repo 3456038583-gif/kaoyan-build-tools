@@ -88,6 +88,9 @@ const HEAD = `<!doctype html>
 <html lang="zh-CN" data-view="__VIEW__">
 <head>
 <meta charset="utf-8">
+<link rel="icon" type="image/png" sizes="32x32" href="/img/icons/f/english-exam-32.png">
+<link rel="icon" type="image/png" sizes="16x16" href="/img/icons/f/english-exam-16.png">
+<link rel="apple-touch-icon" href="/img/icons/apple-touch-icon.png">
 <title>__TITLE__</title>
 <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
 <meta name="description" content="__DESC__">

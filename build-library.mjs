@@ -660,6 +660,9 @@ function renderNotePage(n) {
 <html lang="zh-CN">
 <head>
 <meta charset="utf-8">
+<link rel="icon" type="image/png" sizes="32x32" href="/img/icons/f/search-32.png">
+<link rel="icon" type="image/png" sizes="16x16" href="/img/icons/f/search-16.png">
+<link rel="apple-touch-icon" href="/img/icons/apple-touch-icon.png">
 <title>${esc(n.title)} · 数学/英语知识库</title>
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <link rel="stylesheet" href="/vendor/katex/katex.min.css">
@@ -781,6 +784,9 @@ let libraryIndex = `<!doctype html>
 <html lang="zh-CN">
 <head>
 <meta charset="utf-8">
+<link rel="icon" type="image/png" sizes="32x32" href="/img/icons/f/search-32.png">
+<link rel="icon" type="image/png" sizes="16x16" href="/img/icons/f/search-16.png">
+<link rel="apple-touch-icon" href="/img/icons/apple-touch-icon.png">
 <title>知识库 · 考研资料总库</title>
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <link rel="stylesheet" href="/site.css">
