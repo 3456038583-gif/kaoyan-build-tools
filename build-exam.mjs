@@ -169,7 +169,7 @@ const MARKS_JS = `<script>
 })();
 </script>`;
 
-/* 首页 = 入口：若记住了上次打开的卷子则跳过去（显式点年份/链接不受影响） */
+/* 已弃用：首页自动跳回上次卷子会让点 2026 时被弹走，现在 /exam/ 固定显示 2026 英语（一）。 */
 const POS_JS = (curId) => `<script>
 (function(){try{
   var p=JSON.parse(localStorage.getItem('kaoyanExam.position.v1')||'null');
@@ -185,7 +185,7 @@ function paperPage(p, selfHref, isEntry) {
   const head = HEAD.replace('__TITLE__', `${t} · 考研英语真题`)
     .replace('__DESC__', `${t} 逐题还原：完形、阅读、新题型、翻译，标注难度与答案，附全文精翻与原始解析 PDF。`)
     .replace('__VIEW__', p.set)
-    .replace('</head>', (isEntry ? POS_JS(p.id) : '') + '</head>');
+    .replace('</head>', '</head>');   // 不再注入「回到上次卷子」的跳转：会让点 2026 时被弹回旧年份
   return `${head}
 ${NAV}
 ${barHtml(p, selfHref)}
@@ -215,7 +215,7 @@ for (const p of papers) {
 
 /* 首页 = 最新一套英语（一），进来就是试卷；老用户自动跳回上次那套 */
 const first = (bySet.y1[0] || papers[0]);
-fs.writeFileSync(path.join(SITE, 'exam/index.html'), paperPage(first, '/exam/', true));
+fs.writeFileSync(path.join(SITE, 'exam/index.html'), paperPage(first, null, false));
 
 /* 练习记录单独一页 */
 const recHead = HEAD.replace('__TITLE__', '我的练习记录 · 考研英语真题')
@@ -225,7 +225,7 @@ fs.writeFileSync(
   path.join(SITE, 'exam/records.html'),
   `${recHead}
 ${NAV}
-${barHtml(first, '/exam/', 'records')}
+${barHtml(first, null, 'records')}
 
 <div class="ex-wrap">
   <header class="ex-mast">

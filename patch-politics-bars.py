@@ -41,7 +41,7 @@ def year_row(cur_year):
     for y in YEARS:
         on = ' on' if y == cur_year else ''
         cur = ' aria-current="page"' if y == cur_year else ''
-        href = '/politics/' if y == 2026 else f'/politics/{y}'
+        href = f'/politics/{y}'
         out.append(
             f'<a class="pyear{on}" href="{href}"{cur} data-id="{y}" data-n="38" '
             f'title="{y} 年考研政治真题">{y}<span class="y-st">38 题</span></a>'

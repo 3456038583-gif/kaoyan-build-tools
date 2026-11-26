@@ -185,7 +185,7 @@ def ex_bar(year, self_href=None):
     chips = []
     for y in sorted(bp.PAPERS, reverse=True):
         cur = y == year
-        href = self_href if (cur and self_href) else f'/politics/{y}'
+        href = f'/politics/{y}'
         cls = ' on' if cur else ''
         aria = ' aria-current="page"' if cur else ''
         chips.append(f'<a class="pyear{cls}" href="{href}"{aria} data-id="{y}" data-n="38" '
@@ -225,15 +225,9 @@ MARKS_JS = """<script>
 </script>"""
 
 # 首页 = 入口：记住上次打开的年份，从别的板块切回来时直接跳过去（显式点年份不受影响）
-POS_JS = """<script>
-(function(){try{
-  var p=JSON.parse(localStorage.getItem('kaoyanPolitics.position.v1')||'null');
-  var y=p&&p.y;
-  if(typeof y==='number'&&y>=2010&&y<=2026&&y!==%d){
-    location.replace('/politics/'+y);
-  }
-}catch(e){}})();
-</script>"""
+# 已弃用：首页自动跳转到「上次打开的年份」会让点 2026 时被弹回旧年份，
+# 现在 /politics/ 固定显示最新一年，年份 chip 各自指向 /politics/{year}。
+POS_JS = ''
 
 
 def emit(year, sections, out_name=None):
@@ -270,8 +264,6 @@ def emit(year, sections, out_name=None):
     html = HEAD.format(title=f'{year} 年考研政治真题 · 考研资料总库',
                        desc=f'{year} 年考研政治真题逐题还原：单选、多选、材料分析题，可在线作答并自动算分。',
                        ver=VER)
-    if out_name == 'index.html':
-        html = html.replace('</head>', POS_JS % year + '\n</head>')
     html += '\n' + NAV + '\n'
     html += ex_bar(year, SELF_HREF[0]) + '\n'
     html += '<div id="paper"></div>\n'
